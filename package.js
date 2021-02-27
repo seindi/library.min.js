@@ -195,9 +195,9 @@ Define (String.prototype, "number", function () { return Object.to.number (this)
 Define (String.prototype, "integer", function () { return Object.to.integer (this); });
 Define (String.prototype, "float", function () { return Object.to.float (this); });
 Define (String.prototype, "char", function () { return this.charCodeAt (); });
-Define (String.prototype, "md", function () { return CryptoJS.MD5 (this.toString ()).toString (); });
-Define (String.prototype, "sha", function () { return CryptoJS.SHA1 (this.toString ()).toString (); });
-Define (String.prototype, "x_sha", function () { return CryptoJS.SHA256 (this.toString ()).toString (); });
+Define (String.prototype, "md", function () { return Function.Crypto.md (this.toString ()).toString (); });
+Define (String.prototype, "sha", function () { return Function.Crypto.sha (this.toString ()).toString (); });
+Define (String.prototype, "__sha", function () { return Function.Crypto.__sha (this.toString ()).toString (); });
 Define (String.prototype, "after", function (input, offset) { if ((offset = this.indexOf (input, offset)) >= 0) return this.substr (offset + input.length); else return ""; });
 Define (String.prototype, "begin", function (length = 1, offset) { if (Object.is.string (length)) return this.startsWith (length, offset); else return this.substr (0, length); });
 Define (String.prototype, "before", function (input, offset) { if ((offset = this.indexOf (input, offset)) >= 0) return this.substr (0, offset); else return ""; });
@@ -665,7 +665,7 @@ Object.defineProperty (URL.domain, "extension", {value: function (value) { if (v
 Object.defineProperty (URL.domain.extension, "sort", {value: function (extension) { var single = [], sub = [], domain = extension.sort (); for (var i in domain) { if (domain [i].count (".") > 1) sub.push (domain [i]); else single.push (domain [i]); } return sub.concat (single); }});
 URL.domain.extension ([
 	".com", ".net", ".org", ".info", ".mobi",
-	".co", ".io", ".me", ".ninja", ".blog", ".site", ".store", ".shop", ".live", ".life", ".cloud", ".online", ".host", ".app",
+	".co", ".io", ".me", ".ninja", ".blog", ".site", ".store", ".shop", ".live", ".life", ".cloud", ".online", ".host", ".app", ".dev", ".club",
 	".id", ".co.id",
 	".xyz", ".xxx",
 	".local",
