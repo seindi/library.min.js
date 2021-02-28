@@ -664,7 +664,7 @@ Object.defineProperty (URL.domain, "sub", {value: function (value) { if (value) 
 Object.defineProperty (URL.domain, "extension", {value: function (value) { if (value) return URL.domain.extension.value = URL.domain.extension.sort (value); else return URL.domain.extension.value; }}); Object.defineProperty (URL.domain.extension, "value", {value: [".com", ".net", ".org"], configurable: true, enumerable: true, writable: true});
 Object.defineProperty (URL.domain.extension, "sort", {value: function (extension) { var single = [], sub = [], domain = extension.sort (); for (var i in domain) { if (domain [i].count (".") > 1) sub.push (domain [i]); else single.push (domain [i]); } return sub.concat (single); }});
 URL.domain.extension ([
-	".com", ".net", ".org", ".info", ".mobi",
+	".com", ".net", ".org", ".info", ".mobi", ".tv",
 	".co", ".io", ".me", ".ninja", ".blog", ".site", ".store", ".shop", ".live", ".life", ".cloud", ".online", ".host", ".app", ".dev", ".club",
 	".id", ".co.id",
 	".xyz", ".xxx",
@@ -674,7 +674,7 @@ URL.domain.extension ([
 Object.defineProperty (URL, "fetch", {
 	value: class {
 		constructor () { this.url = "http://127.0.0.1:3000"; }
-		get (url, option) { return new URL.fetch.promise (this.fetch (url, Object.assign ({method: "GET"}, option))) }
+		get (url, option) { return new URL.fetch.promise (this.fetch (url, Object.assign ({method: "GET"}, option))); }
 		post (url, data, option) {
 			const FD = new FormData ();
 			if (data) {
@@ -705,11 +705,11 @@ Object.defineProperty (URL, "fetch", {
 				if (header.status.code === 201) header.status.message = "create";
 				if (header.status.code === 403) header.status.message = "error:forbidden";
 				if (header.status.code === 404) header.status.message = "error:found";
-				if (header.status.code === 500) header.status.message = "error";
-				var header_error_type = function () { if (header.status.code = 1000) if (header.status.message = "error:type") return {header} }
+				if (header.status.code === 500) header.status.message = "error:s";
+				var T_error = function () { if (header.status.code = 1000) if (header.status.message = "error:type") return {header} }
 				var html = async function () {
 					if (header.type === "text/html") return {header, body: await response.text ()}
-					return header_error_type ();
+					return T_error ();
 					}
 				var json = async function () {
 					if (header.type === "application/json") {
@@ -717,11 +717,11 @@ Object.defineProperty (URL, "fetch", {
 						if (typeof body === "string") body = {body: body}
 						return Object.assign ({header}, body);
 						}
-					return header_error_type ();
+					return T_error ();
 					}
 				var text = async function () {
 					if (header.type === "text/plain") return {header, body: await response.text ()}
-					return header_error_type ();
+					return T_error ();
 					}
 				var blob = async function () { return {header, body: await response.blob ()} }
 				return {__: header, html: html, json: json, text: text, blob: blob}
@@ -785,7 +785,7 @@ Object.defineProperty (Function.http, "header", {value: function () {}});
 Object.defineProperty (Function.http.header, "status", {
 	value: {
 		OK: 200,
-		error: {request: 400, forbidden: 403, found: 404, legal: 451, internal: 500},
+		error: {request: 400, forbidden: 403, found: 404, legal: 451, s: 500},
 		message: {},
 		code: {
 			100: "Continue",

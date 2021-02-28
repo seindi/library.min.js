@@ -1,1 +1,1 @@
-import "./plugin-hash"
+import "./s/crypto"
