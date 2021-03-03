@@ -1,1 +1,1 @@
-import "./s/crypto"
+import "./hash";
