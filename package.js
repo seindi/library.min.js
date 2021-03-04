@@ -1,4 +1,6 @@
 /**
+ * xxx
+ *
  * title
  * description
  * sub description
@@ -46,6 +48,8 @@ Define.class = function (proto, key, value, option) { return Define.value (proto
 Define.descriptor = function (key, value, option) { return Define.property (Define.properties.prototype, key, value, option) }
 
 /**
+ * xxx
+ *
  * title
  * description
  * sub description
@@ -119,6 +123,8 @@ Define (Object.to, "float", function (input) { if (Object.is.nan (input = parseF
 Define (Object.to, "boolean", function (input) { if (input) if (["false", "null", "undefined"].includes (input)) return false; else return true; else return false; });
 
 /**
+ * xxx
+ *
  * title
  * description
  * sub description
@@ -180,6 +186,8 @@ Define (Object.optional, "of", function (option, factory = {}, configurable) {
 	});
 
 /**
+ * xxx
+ *
  * title
  * description
  * sub description
@@ -218,6 +226,8 @@ Define (Array.keys, "find", function (value, array) { return array.findIndex (va
 Define (Array.keys, "format", function (array, format = "{%s}") { var data = []; for (var i in array) data.push (format.format (array [i])); return data; });
 
 /**
+ * xxx
+ *
  * title
  * description
  * sub description
@@ -278,6 +288,8 @@ Define (String.char, "ln", {s: "\n", r: "\r", tab: "\t"});
 Define (String.char, "line", {r: "\r\n"});
 
 /**
+ * xxx
+ *
  * title
  * description
  * sub description
@@ -329,6 +341,8 @@ Define (Number, "float",  (1 / 2).toString ().substr (1, 1));
 new Number.BYTE;
 
 /**
+ * xxx
+ *
  * title
  * description
  * sub description
@@ -426,6 +440,8 @@ Define (Function, "Cookie", class Cookie {
 	});
 
 /**
+ * xxx
+ *
  * title
  * description
  * sub description
@@ -584,6 +600,8 @@ Object.defineProperty (Date, "properties", {
 	})
 
 /**
+ * xxx
+ *
  * title
  * description
  * sub description
@@ -809,6 +827,8 @@ Object.defineProperty (URL.fetch, "promise", {
 	});
 
 /**
+ * xxx
+ *
  * title
  * description
  * sub description
@@ -892,6 +912,8 @@ Object.defineProperty (Function.http.header, "status", {
 	});
 
 /**
+ * xxx
+ *
  * title
  * description
  * sub description
