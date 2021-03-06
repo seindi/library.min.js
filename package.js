@@ -149,6 +149,9 @@ Define (Object.keys, "exist", function (key, object, offset) { return Object.key
 Define (Object.keys, "find", function (value, object) { for (var key in object) if (object [key] === value) return key; });
 Define (Object.keys, "format", function (object, format = "%s") { var data = {}; for (var key in object) data [format.format (key)] = object [key]; return data; });
 
+Object.key = Object.keys;
+Object.value = Object.values;
+
 Define (Object, "argument", function (... option) {
 	var argument = {}
 	for (var i in option) {
@@ -205,7 +208,7 @@ Define (Array.prototype, "end", function (value = "") { for (var i in this) valu
 Define (Array.prototype, "exist", function (value, offset) { return this.includes (value, offset); });
 Define (Array.prototype, "format", function (input, format) { var array; if (input = input.toString ()) for (var i in (array = Array.keys.format (this, format))) input = input.replace (array [i], format); return input; });
 Define (Array.prototype, "include", function (value, offset) { for (var i in value) if (this.includes (value [i], offset) === false) return false; return true; });
-Define (Array.prototype, "index", function (value, offset) { var array; if (Object.is.function (value)) array = this.slice (offset).findIndex (value); else array = this.indexOf (value, offset); return index_of (array); });
+Define (Array.prototype, "index", function (value, offset) { var array; if (Object.is.function (value)) array = this.slice (offset).findIndex (value); else array = this.indexOf (value, offset); return Function.indexOf (array); });
 Define (Array.prototype, "insert", function (offset, ... value) { return this.splice (offset, 0, ... value); });
 Define (Array.prototype, "key", function () { var array = []; for (var [i] of this.entries ()) array.push (i); return array; });
 Define (Array.prototype, "max", function () { return Math.max (... this); });
@@ -241,9 +244,9 @@ Define (String.prototype, "number", function () { return Object.to.number (this)
 Define (String.prototype, "integer", function () { return Object.to.integer (this); });
 Define (String.prototype, "float", function () { return Object.to.float (this); });
 Define (String.prototype, "char", function () { return this.charCodeAt (); });
-Define (String.prototype, "md", function () { return Function.hash.md (this.toString ()).toString (); });
-Define (String.prototype, "sha", function () { return Function.hash.sha (this.toString ()).toString (); });
-Define (String.prototype, "__sha", function () { return Function.hash.__sha (this.toString ()).toString (); });
+Define (String.prototype, "md", function () { return Function.hash.md (this.toString ()); });
+Define (String.prototype, "sha", function () { return Function.hash.sha (this.toString ()); });
+Define (String.prototype, "sha-x", function () { return Function.hash ["sha-x"] (this.toString ()); });
 Define (String.prototype, "after", function (input, offset) { if ((offset = this.indexOf (input, offset)) >= 0) return this.substr (offset + input.length); else return ""; });
 Define (String.prototype, "begin", function (length = 1, offset) { if (Object.is.string (length)) return this.startsWith (length, offset); else return this.substr (0, length); });
 Define (String.prototype, "before", function (input, offset) { if ((offset = this.indexOf (input, offset)) >= 0) return this.substr (0, offset); else return ""; });
@@ -256,7 +259,7 @@ Define (String.prototype, "end", function (length = 1, offset) { if (Object.is.s
 Define (String.prototype, "exist", function (input, offset) { return this.includes (input, offset); });
 Define (String.prototype, "format", function (... format) { return Function.util.format (this.toString (), ... format); });
 Define (String.prototype, "include", function (input, offset) { for (var i in input) if (this.includes (input [i], offset) === false) return false; return true; });
-Define (String.prototype, "index", function (input, offset) { return index_of (this.indexOf (input, offset)); });
+Define (String.prototype, "index", function (input, offset) { return Function.indexOf (this.indexOf (input, offset)); });
 Define (String.prototype, "pad", function (input, length, pad = "begin") { if (pad === "begin") return this.padStart (length, input); else if (pad === "end") return this.padEnd (length, input); else return this; });
 Define (String.prototype, "pop", function (length = 1) { if (Object.is.string (length)) return this.substr (0, (this.length - length.length)) === length; else return this.substr (0, (this.length - length)); });
 Define (String.prototype, "pos", function (offset, length = 1) { return this.substr (offset, length); });
@@ -268,7 +271,7 @@ Define (String.prototype, "shuffle", function () { return this.split ("").shuffl
 Define (String.prototype, "small", function () { return this.toLowerCase (); });
 Define (String.prototype, "splice", function (length = 1) { var splice = [], slice = [], offset = length; for (var i in this) { slice.push (this [i]); if (i == (offset - 1)) { splice.push (slice.join ("")); slice = []; offset = (offset + length); } } if (slice.length) splice.push (slice.join ("")); return splice; });
 Define (String.prototype, "trim", function (trim) { if (trim === "begin") { return this.trimStart (); } else if (trim === "end") { return this.trimEnd (); } else { var string = this.replace (/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, ""); if (trim) { trim = []; for (var i in (string = string.split (" "))) if (string [i].trim ()) trim.push (string [i]); return trim.join (" "); } else { return string; } } });
-Define (String.prototype, "password", function (offset, length) { return Function.hash.password (this, offset, length); });
+Define (String.prototype, "password", function (offset, length) { return Function.hash.s (this.toString (), offset, length); });
 Define (String.prototype, "uc_first", function () { return this.substr (0, 1).toUpperCase () + this.substr (1); });
 Define (String.prototype, "uc_word", function () { var string = this.split (" "), data = []; for (var i in string) data.push (string [i].uc_first ()); return data.join (" "); });
 
@@ -525,7 +528,7 @@ Object.defineProperty (Date, "Time", {
 				if (typeof arguments [i] === "string") format = arguments [i];
 				if (typeof arguments [i] === "object") offset = arguments [i];
 				}
-			if (offset) return this.offset (this.get.query.stamp, offset).format (format);
+			if (offset) return this.offset (this.get.stamp, offset).format (format);
 			var date = [];
 			var object = this.object ();
 			format = Date.format [format || "default"] || format;
@@ -545,7 +548,7 @@ Object.defineProperty (Date, "create", {
 	});
 
 Object.defineProperty (Date, "universal", {value: function (offset) { var date = new Date (); if (offset = Date.offset (offset)) return Date.universal.offset = Date.now () - new Date ((date.getUTCFullYear () + offset.year), (date.getUTCMonth () + offset.month), (date.getUTCDate () + offset.day), (date.getUTCHours () + offset.hour), (date.getUTCMinutes () + offset.minute), (date.getUTCSeconds () + offset.second), (date.getUTCMilliseconds () + offset.ms)).getTime (); }}), Object.defineProperty (Date.universal, "offset", {value: 0, configurable: true, enumerable: true, writable: true});
-Object.defineProperty (Date, "zone", {value: function (offset) { if (offset) for (var i in offset) Date.zone.offset [i] = offset [i]; }}), Object.defineProperty (Date.zone, "offset", {value: {year: 0, month: 0, day: 0, hour: 0, minute: 0, second: 0, ms: 0}});
+Object.defineProperty (Date, "zone", {value: function (offset) { if (offset) for (var i in offset) Date.zone.offset [i] = offset [i]; }});
 Object.defineProperty (Date, "stamp", {value: function () { return Date.now (); }});
 Object.defineProperty (Date, "sleep", {value: function (context, second = 1, ... param) { return setTimeout (context, (second * 1000), ... param); }}), Object.defineProperty (Date.sleep, "clear", {value: function (context) { clearTimeout (context); }});
 Object.defineProperty (Date, "interval", {value: function (context, second = 1, ... param) { return setInterval (context, (second * 1000), ... param); }}), Object.defineProperty (Date.interval, "clear", {value: function (context) { clearInterval (context); }});
@@ -561,6 +564,21 @@ Object.defineProperty (Date, "format", {
 		"date:time": "Y-M-D H:I:S",
 		"time": "H:I:S",
 		"time:s": "H:I",
+		},
+	});
+Object.defineProperty (Date.Time, "zone", {
+	value: {
+		universal: {name: "Universal", base: {name: "Universal"}, country: {name: "Universal"}, offset: {hour: 0, minute: 0}},
+		"asia/jakarta": {name: "", base: {name: "Asia/Jakarta"}, country: {name: "Indonesia"}, offset: {hour: 7, minute: 0}},
+		"asia/seoul": {name: "", base: {name: "Asia/Seoul"}, country: {name: "South Korea"}, offset: {hour: 9, minute: 0}},
+		"asia/tokyo": {name: "", base: {name: "Asia/Tokyo"}, country: {name: "Japan"}, offset: {hour: 9, minute: 0}},
+		"asia/singapore": {name: "", base: {name: "Asia/Singapore"}, country: {name: "Singapore"}, offset: {hour: 8, minute: 0}},
+		"asia/shanghai": {name: "", base: {name: "Asia/Shanghai"}, country: {name: "China"}, offset: {hour: 8, minute: 0}},
+		"asia/hong_kong": {name: "", base: {name: "Asia/Hong_Kong"}, country: {name: "Hong Kong"}, offset: {hour: 8, minute: 0}},
+		"asia/taipei": {name: "", base: {name: "Asia/Taipei"}, country: {name: "Taiwan"}, offset: {hour: 8, minute: 0}},
+		"asia/kuala_lumpur": {name: "", base: {name: "Asia/Kuala_Lumpur"}, country: {name: "Malaysia"}, offset: {hour: 8, minute: 0}},
+		"asia/qatar": {name: "", base: {name: "Asia/Qatar"}, country: {name: "Qatar"}, offset: {hour: 3, minute: 0}},
+		"asia/dubai": {name: "", base: {name: "Asia/Dubai"}, country: {name: "United Arab Emirate (UAE)"}, offset: {hour: 4, minute: 0}},
 		},
 	});
 
@@ -727,7 +745,7 @@ URL.domain.extension ([
 
 Object.defineProperty (URL, "fetch", {
 	value: class {
-		constructor () { this.url = "http://127.0.0.1:3000"; }
+		constructor (url = "http://127.0.0.1:3000") { this.url = url; }
 		get (url, option) { return new URL.fetch.promise (this.fetch (url, Object.assign ({method: "GET"}, option))); }
 		post (url, data, option) {
 			const FD = new FormData ();
@@ -927,7 +945,7 @@ Object.defineProperty (Function.query, "selector", {value: function (key) { retu
 Object.defineProperty (Function, "attribute", {value: function () {}});
 Object.defineProperty (Function.attribute, "get", {value: function (key, dom) { if (dom) return dom.getAttribute (key) || ""; }});
 
-function index_of (input) { if (input >= 0) return input; }
+Object.defineProperty (Function, "indexOf", {value: function indexOf (input) { if (input >= 0) return input; }});
 
 /**
  * the end

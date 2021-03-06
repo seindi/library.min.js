@@ -7,7 +7,7 @@
 "homepage": "https://github.com/seindi/library.min.js",
 "repository": {"type": "git", "url": "git+https://github.com/seindi/library.min.js.git"},
 "bugs": {"url": "https://github.com/seindi/library.min.js/issues"},
-"main": "package.js", "files": ["package.js", ".github", ".gitignore", ".npm", ".npmignore", "HISTORY", "LICENSE", "README.md", "plugin/"],
+"main": "package.js", "files": ["package.js", ".github", ".gitignore", ".npm", ".npmignore", "HISTORY", "LICENSE", "README.md"],
 "keywords": ["lib", "library"],
 "dependencies": {}
 }
